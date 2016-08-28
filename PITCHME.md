@@ -9,10 +9,25 @@ Where I am coming from
 
 #VSLIDE
 
+### C
+```c
+  void* pleasework() {
+    char *p;
+    *p = 0;
+    return (void*) $p;
+  }
+```
+
+#VSLIDE
+
 ### C#
 ```c#
-class Something {
-
+public class WeHaveObjects
+{
+   public static void Main()
+   {
+      System.Console.WriteLine("Hello, World!");
+   }
 }
 ```
 
@@ -21,7 +36,8 @@ class Something {
 ### Ruby
 
 ```ruby
-def module
+def method_missing(*args)
+  puts 'This is refreshing!'
 end
 ```
 
@@ -29,16 +45,13 @@ end
 
 ### Go
 ```go
-func something() {
-
+package main
+import "fmt"
+func main() {
+  fmt.Println("Easy and fast!")
 }
 ```
 
 #VSLIDE
 
-### Elixir
-```elixir
-defmodule Something do
-
-end
-```
+But...
