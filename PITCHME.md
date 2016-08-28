@@ -9,7 +9,7 @@ Where I am coming from
 
 #VSLIDE
 
-### C\#
+### C#
 ```c#
 class Something {
 
