@@ -20,7 +20,7 @@ Where I am coming from
 
 #VSLIDE
 
-### C#
+### C# #
 ```c#
 public class WeHaveObjects
 {
@@ -36,9 +36,7 @@ public class WeHaveObjects
 ### Ruby
 
 ```ruby
-def method_missing(*args)
-  puts 'This is refreshing!'
-end
+puts 'This is so liberating!'
 ```
 
 #VSLIDE
@@ -48,10 +46,16 @@ end
 package main
 import "fmt"
 func main() {
-  fmt.Println("Easy and fast!")
+  fmt.Println("So fast!!")
 }
 ```
 
 #VSLIDE
 
-But...
+### Ruby
+
+```ruby
+def method_missing(*args)
+  puts 'Really??'
+end
+```
