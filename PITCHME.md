@@ -9,9 +9,8 @@ Where I am coming from
 
 #VSLIDE
 
-# C#
+# C\#
 ```c#
-// C#
 class Something {
 
 }
@@ -39,5 +38,6 @@ func something() {
 
 ```elixir
 defmodule Something do
+  
 end
 ```
