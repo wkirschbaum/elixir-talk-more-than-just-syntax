@@ -8,30 +8,36 @@
 Where I am coming from
 
 #VSLIDE
-C#
 
+# C#
+```c#
 // C#
 class Something {
 
 }
+```
 
 #VSLIDE
-// Ruby
 
+# Ruby
+
+```ruby
 def module
 end
+```
 
 #VSLIDE
-// Go
 
+Go
+```go
 func something() {
 
 }
+```
 
 #VSLIDE
 
-// Elixir
-
+```elixir
 defmodule Something do
-
 end
+```
