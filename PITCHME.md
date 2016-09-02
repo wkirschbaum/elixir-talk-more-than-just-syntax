@@ -5,7 +5,14 @@
 
 #HSLIDE
 
-Where I am coming from
+## Wilhelm Kirschbaum
+[ @wkirschbaum ]
+
+
+Prodigy Finance
+#HSLIDE
+
+I like languages :)
 
 #VSLIDE
 
@@ -52,10 +59,50 @@ func main() {
 
 #VSLIDE
 
-### Ruby
+### Back to Ruby
 
 ```ruby
 def method_missing(*args)
   puts 'Really??'
 end
 ```
+
+#HSLIDE
+
+## What is Elixir?
+
+#VSLIDE
+
+Elixir is a dynamic, functional language (with beautiful syntax),
+designed for building scalable and maintainable applications.
+
+#VSLIDE
+
+Created by José Valim
+
+#VSLIDE
+
+Built on the Erlang virtual machine (BEAM)
+
+#VSLIDE
+
+OTP
+
+#VSLIDE
+
+Hex
+
+#VSLIDE
+
+Mix
+
+#HSLIDE
+
+## Erlang is awesome
+
+## Mocking using actual server using bypass
+
+Notes:
+This is not ruby! Change the way you think! (from previous talks: ruby devs explaining elixir)
+
+More than syntax, so lets show some syntax.
