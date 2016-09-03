@@ -99,13 +99,42 @@ Mix
 #VSLIDE
 
 ```elixir
-# romans/test/romans_test.exs
+# test/romans_test.exs
 defmodule RomansTest do
   use ExUnit.Case, async: true
   doctest Romans
 
-  describe "convert roman numerals to integer" do
-    test "convert 'I' to 1" do
+  describe "Roman.convert/1" do
+    test "converts 'I' to 1" do
+      assert Romans.convert("I") == 1
+    end
+  end
+end
+```
+
+#VSLIDE
+
+```bash
+$ mix test
+Compiling 1 file (.ex)
+Generated romans app
+** (CompileError) test/romans_test.exs:3: module Romans is not loaded and could not be found
+    (ex_unit) expanding macro: ExUnit.DocTest.doctest/1
+    test/romans_test.exs:3: RomansTest (module)
+    (elixir) lib/code.ex:363: Code.require_file/2
+    (elixir) lib/kernel/parallel_require.ex:56: anonymous fn/2 in Kernel.ParallelRequire.spawn_requires/5
+```
+
+#VSLIDE
+
+```elixir
+# test/romans_test.exs
+defmodule RomansTest do
+  use ExUnit.Case, async: true
+  doctest Romans
+
+  describe "Roman.convert/1" do
+    test "converts 'I' to 1" do
       assert Romans.convert("I") == 1
     end
   end
@@ -113,7 +142,7 @@ end
 ```
 
 ```elixir
-# romans/lib/romans.exs
+# lib/romans.exs
 defmodule Romans do
   def convert(_roman) do
     1
@@ -121,11 +150,85 @@ defmodule Romans do
 end
 ```
 
+#VSLIDE
+
 ```bash
-mix test
+$ mix test
+Compiling 1 file (.ex)
+Generated romans app
+.
+
+Finished in 0.03 seconds
+1 test, 0 failures
+
+Randomized with seed 832675
 ```
 
+#VSLIDE
+```elixir
+defmodule RomansTest do
+  use ExUnit.Case, async: true
+  doctest Romans
 
+  describe "Roman.convert/1" do
+    test "converts 'I' to 1" do
+      assert Romans.convert("I") == 1
+    end
+
+    test "converts 'II' to 2" do
+      assert Romans.convert("II") == 2
+    end
+  end
+end
+```
+#VSLIDE
+
+```bash
+$ mix test
+.
+
+  1) test Roman.convert/1 converts 'II' to 2 (RomansTest)
+     test/romans_test.exs:10
+     Assertion with == failed
+     code: Romans.convert("II") == 2
+     lhs:  1
+     rhs:  2
+     stacktrace:
+       test/romans_test.exs:11: (test)
+
+Finished in 0.04 seconds
+2 tests, 1 failure
+
+Randomized with seed 762841
+```
+#VSLIDE
+
+```elixir
+defmodule RomansTest do
+  use ExUnit.Case, async: true
+  doctest Romans
+
+  describe "Roman.convert/1" do
+    test "converts 'I' to 1" do
+      assert Romans.convert("I") == 1
+    end
+
+    test "converts 'II' to 2" do
+      assert Romans.convert("II") == 2
+    end
+  end
+end
+```
+
+```elixir
+defmodule Romans do
+  def convert(roman) do
+    String.length(roman)
+  end
+end
+```
+
+#HSLIDE
 
 ## Mocking using actual server using bypass
 

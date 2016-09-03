@@ -1,5 +1,5 @@
 defmodule Romans do
-  def convert(_roman) do
-    1
+  def convert(roman) do
+    String.length(roman)
   end
 end
