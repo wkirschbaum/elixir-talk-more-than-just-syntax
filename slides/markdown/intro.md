@@ -1,3 +1,21 @@
+#HSLIDE
+
+# Elixir
+## More than just syntax
+
+#HSLIDE
+
+## Wilhelm Kirschbaum
+[ @wkirschbaum ]
+
+
+Prodigy Finance
+#HSLIDE
+
+I like languages :)
+
+#VSLIDE
+
 ### C
 ```c
   void* pleasework() {

@@ -15,6 +15,14 @@ defmodule RomansTest do
       assert Romans.convert("V") == 5
     end
 
+    test "converts 'IV' to 4" do
+      assert Romans.convert("IV") == 4
+    end
+
+    test "converts 'VII' to 7" do
+      assert Romans.convert("VII") == 7
+    end
+
     test "converts 'X' to 10" do
       assert Romans.convert("X") == 10
     end

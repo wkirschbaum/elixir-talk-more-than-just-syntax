@@ -1,0 +1,99 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="css/reveal.css">
+        <link rel="stylesheet" href="css/theme/white.css">
+        <link rel="stylesheet" href="css/styles/default.css">
+    </head>
+    <body>
+        <div class="reveal">
+            <div class="slides">
+
+
+<section>
+  <h1>Elixir</h1>
+  <h3>More than just syntax</h3>
+</section>
+
+<section>
+  <section>
+    <h2>Wilhelm Kirschbaum</h2>
+    <h4>[ @wkirschbaum ]</h4>
+    <h4>Prodigy Finance</h4>
+  </section>
+  <section>
+    I like languages :)
+  </section>
+  <section>
+    <h2>C</h2>
+    <pre><code data-trim data-noescape>
+void* pleasework() {
+  char *p;
+  *p = 0;
+  return (void*) $p;
+}
+    </code></pre>
+  </section>
+  <section>
+    <h2>C#</h2>
+    <pre><code data-trim data-noescape>
+public class WeHaveObjects
+{
+   public static void Main()
+   {
+      System.Console.WriteLine("Hello, World!");
+   }
+}
+    </code></pre>
+  </section>
+  <section>
+    <h2>Ruby</h2>
+    <pre><code data-trim data-noescape>
+puts 'This is so liberating!'
+    </code></pre>
+  </section>
+  <section>
+    <h2>Go</h2>
+    <pre><code data-trim data-noescape>
+package main
+import "fmt"
+func main() {
+  fmt.Println("So fast!!")
+}
+    </code></pre>
+  </section>
+  <section>
+    <h2>Ruby (again)</h2>
+    <pre><code data-trim data-noescape>
+def method_missing(*args)
+  puts 'Really??'
+end
+    </code></pre>
+  </section>
+</section>
+
+
+
+
+            </div>
+        </div>
+        <script src="js/head.min.js"></script>
+        <script src="js/reveal.js"></script>
+        <script src="js/highlight.pack.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
+        <script>
+        Reveal.initialize({
+          dependencies: [
+              // Interpret Markdown in <section> elements
+              { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+              { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+
+              // Syntax highlight for <code> elements
+              { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+
+              // Speaker notes
+              { src: 'plugin/notes/notes.js', async: true },
+          ]
+          });
+        </script>
+    </body>
+</html>
