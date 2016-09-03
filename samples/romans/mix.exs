@@ -1,8 +1,8 @@
-defmodule FirstExample.Mixfile do
+defmodule Romans.Mixfile do
   use Mix.Project
 
   def project do
-    [app: :first_example,
+    [app: :romans,
      version: "0.1.0",
      elixir: "~> 1.3",
      build_embedded: Mix.env == :prod,

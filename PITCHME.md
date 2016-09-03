@@ -86,10 +86,6 @@ Built on the Erlang virtual machine (BEAM)
 
 #VSLIDE
 
-OTP
-
-#VSLIDE
-
 Hex
 
 #VSLIDE
@@ -98,7 +94,38 @@ Mix
 
 #HSLIDE
 
-## Erlang is awesome
+## Testing Elixir code
+
+#VSLIDE
+
+```elixir
+# romans/test/romans_test.exs
+defmodule RomansTest do
+  use ExUnit.Case, async: true
+  doctest Romans
+
+  describe "convert roman numerals to integer" do
+    test "convert 'I' to 1" do
+      assert Romans.convert("I") == 1
+    end
+  end
+end
+```
+
+```elixir
+# romans/lib/romans.exs
+defmodule Romans do
+  def convert(_roman) do
+    1
+  end
+end
+```
+
+```bash
+mix test
+```
+
+
 
 ## Mocking using actual server using bypass
 
