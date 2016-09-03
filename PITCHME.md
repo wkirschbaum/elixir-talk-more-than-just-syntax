@@ -98,6 +98,28 @@ Mix
 
 #VSLIDE
 
+```bash
+mix new romans
+```
+
+```bash
+$ tree -d romans/
+romans/
+├── _build
+│   └── dev
+│       ├── consolidated
+│       └── lib
+│           └── romans
+│               └── ebin
+├── config
+├── lib
+└── test
+
+9 directories
+```
+
+#VSLIDE
+
 ```elixir
 # test/romans_test.exs
 defmodule RomansTest do
@@ -224,6 +246,179 @@ end
 defmodule Romans do
   def convert(roman) do
     String.length(roman)
+  end
+end
+```
+
+#VSLIDE
+
+```elixir
+...
+
+test "converts 'II' to 2" do
+  assert Romans.convert("II") == 2
+end
+
+test "converts 'V' to 5" do
+  assert Romans.convert("V") == 5
+end
+```
+
+#VSLIDE
+
+```elixir
+defmodule Romans do
+  def convert(roman) do
+    if roman == "V" do
+      5
+    else
+      String.length(roman)
+    end
+  end
+end
+```
+
+#VSLIDE
+
+```elixir
+defmodule Romans do
+  def convert(roman) do
+    if roman == "V" do
+      5
+    else
+      String.length(roman)
+    end
+  end
+end
+```
+
+#VSLIDE
+
+```elixir
+defmodule Romans do
+  def convert(roman) do
+    if roman == "V" do
+      5
+    else
+      String.length(roman)
+    end
+  end
+end
+```
+
+```elixir
+defmodule Romans do
+  def convert("V") do
+    5
+  end
+
+  def convert(roman) do
+    String.length(roman)
+  end
+end
+```
+
+#VSLIDE
+
+```elixir
+...
+
+test "converts 'V' to 5" do
+  assert Romans.convert("V") == 5
+end
+
+test "converts 'X' to 10" do
+  assert Romans.convert("X") == 10
+end
+```
+
+#VSLIDE
+
+```elixir
+defmodule Romans do
+  def convert("X") do
+    10
+  end
+
+  def convert("V") do
+    5
+  end
+
+  def convert(roman) do
+    String.length(roman)
+  end
+end
+```
+
+#VSLIDE
+
+```bash
+$ mix test
+Compiling 1 file (.ex)
+....
+
+Finished in 0.04 seconds
+4 tests, 0 failures
+
+Randomized with seed 26252
+```
+#VSLIDE
+
+```elixir
+defmodule Romans do
+  def convert("X") do
+    10
+  end
+
+  def convert("V") do
+    5
+  end
+
+  def convert(roman) do
+    String.length(roman)
+  end
+end
+```
+
+#VSLIDE
+
+```elixir
+defmodule Romans do
+  def convert("X") do
+    String.duplicate("I", 10)
+    |> convert
+  end
+
+  def convert("V") do
+    String.duplicate("I", 5)
+    |> convert
+  end
+
+  def convert(roman) do
+    String.length(roman)
+  end
+end
+```
+
+#VSLIDE
+
+```elixir
+defmodule Romans do
+  def convert(romans) do
+    romans
+    |> map_to_ones
+    |> ones_to_integer
+  end
+
+  defp map_to_ones(romans) do
+    Map.get(%{
+      "X" => String.duplicate("I", 10),
+      "V" => String.duplicate("I", 5),
+    }, romans, romans)
+  end
+
+  defp ones_to_integer(ones) do
+    String.length(ones)
   end
 end
 ```
