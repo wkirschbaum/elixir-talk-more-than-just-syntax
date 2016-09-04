@@ -488,6 +488,146 @@ iex(4)>
     </code></pre>
   </section>
 </section>
+<section>
+  <section>
+    <h2>Pattern matching</h2>
+  </section>
+  <section>
+    <h2>Fibonacci</h2>
+    F0=0<br />
+    F1=1<br />
+    Fn = Fn-1 + Fn-2
+  </section>
+  <section>
+    F0=0<br />
+    F1=1<br />
+    Fn = Fn-1 + Fn-2
+      <pre><code class="elixir" data-trim data-noescape>
+    defmodule Fib do
+      def fib(0) do 0 end
+      def fib(1) do 1 end
+      def fib(n) do fib(n-1) + fib(n-2) end
+    end
+    IO.puts Fib.fib(10)
+  </code></pre>
+  or...
+  </section>
+  <section>
+    <pre><code class="elixir" data-trim data-noescape>
+  defmodule Fib do
+    def fib(0) do 0 end
+    def fib(1) do 1 end
+    def fib(n) do fib(n-1) + fib(n-2) end
+  end
+</code></pre>
+
+      <pre><code class="elixir" data-trim data-noescape>
+  defmodule Fib do
+    def fib(n) when n <= 1 do n end
+    def fib(n) do fib(n-1) + fib(n-2) end
+  end
+  </code></pre>
+  </section>
+  <section>
+    Assignments?<br />
+    <pre><code class="elixir" data-trim data-noescape>
+      iex(1)> a = 5
+      5
+      iex(2)> a
+      5
+    </code></pre>
+  </section>
+  <section>
+    What does this do?<br />
+    <pre><code class="elixir" data-trim data-noescape>
+      iex(1)> {a, 5} = {3, 5}
+    </code></pre>
+    and this?
+    <pre><code class="elixir" data-trim data-noescape>
+      iex(3)> {a, 9} = {3, 5}
+    </code></pre>
+  </section>
+  <section>
+    <pre><code class="elixir" data-trim data-noescape>
+      iex(1)> {a, 5} = {3, 5}
+      {3, 5}
+      iex(2)> a
+      3
+      iex(3)> {a, 9} = {3, 5}
+      ** (MatchError) no match of right hand side value: [3, 5]
+      iex(4)> [name, "Smith"] = ["John", "Smith"]
+      ["John", "Smith"]
+      iex(5)> name
+      "John"
+      iex(6)> [name, "Smith"] = ["John", "Burton"]
+      ** (MatchError) no match of right hand side value: ["John", "Burton"]
+
+    </code></pre>
+  </section>
+  <section>
+    <pre><code class="elixir" data-trim data-noescape>
+      defmodule Human do
+        defstruct name: "", surname: "", age: 0
+      end
+
+      defmodule Bar do
+        def serve_drinks(%Human{age: age}) when age > 18 do
+          {:ok, "Enjoy!"}
+        end
+        def serve_drinks(%Human{}) do
+          {:error, "You are underage."}
+        end
+        def serve_drinks(_) do
+          {:error, "Only serving humans."}
+        end
+      end
+    </code></pre>
+  </section>
+</section>
+<section>
+  <section>
+    <h2>Error Handling</h2>
+  </section>
+  <section>
+    <pre><code class="elixir" data-trim data-noescape>
+    iex> try do
+    ...>   raise "oops"
+    ...> rescue
+    ...>   e in RuntimeError -> e
+    ...> end
+    %RuntimeError{message: "oops"}
+    </code></pre>
+  </section>
+  <section>
+    <pre><code class="elixir" data-trim data-noescape>
+    iex> File.read "hello"
+    {:error, :enoent}
+    iex> File.write "hello", "world"
+    :ok
+    iex> File.read "hello"
+    {:ok, "world"}
+    </code></pre>
+  </section>
+  <section>
+    <pre><code class="elixir" data-trim data-noescape>
+    defmodule Read do
+      def read_file do
+        File.read "hello"
+        |> parse
+      end
+
+      defp parse(:ok, output) do
+        ouput
+      end
+
+      defp parse(:error, _) do
+        File.write "hello", "world"
+        "world"
+      end
+    end
+    </code></pre>
+  </section>
+</section>
 
 
 
@@ -507,6 +647,8 @@ iex(4)>
 
               // Speaker notes
               { src: 'plugin/notes/notes.js', async: true },
+              // MathJax
+              { src: 'plugin/math/math.js', async: true }
           ]
           });
         </script>
