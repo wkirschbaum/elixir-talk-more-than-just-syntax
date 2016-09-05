@@ -6,7 +6,7 @@ defmodule Spawner do
   end
 
   defp long_process do
-    Process.sleep(1000)
+    raise "oops!"
     IO.puts "tick"
   end
 end

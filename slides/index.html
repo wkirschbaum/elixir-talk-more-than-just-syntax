@@ -66,8 +66,8 @@ end
     <h2>What is Elixir?</h2>
   </section>
   <section>
-    Elixir is a dynamic, functional language (with beautiful syntax),
-    designed for building scalable and maintainable applications.
+    "Elixir is a dynamic, functional language,
+    designed for building scalable and maintainable applications."
   </section>
   <section>
     Created by José Valim
@@ -77,9 +77,33 @@ end
   </section>
   <section>
     Hex
+    <pre><code class="elixir" data-trim data-noescape>
+    defp deps do
+      [{:basic_auth, "~> 1.0.0"}]
+    end
+    </code></pre>
   </section>
   <section>
-    Mix
+    <div>
+      Mix
+    </div>
+    <ul>
+      <li>
+        Project creation
+      </li>
+      <li>
+        Project compilation
+      </li>
+      <li>
+        Running tests
+      </li>
+      <li>
+        Environments
+      </li>
+      <li>
+        Exploring
+      </li>
+    </ul>
   </section>
 </section>
 <section>
@@ -672,12 +696,66 @@ iex(4)>
     </code></pre>
   </section>
   <section>
-    spawn_link
+    <pre><code class="elixir" data-trim data-noescape>
+      iex> spawn fn -> raise "oops" end
+      #PID<0.58.0>
+
+      [error] Process #PID<0.58.00> raised an exception
+      ** (RuntimeError) oops
+          :erlang.apply/2
+    </code></pre>
+  </section>
+  <section>
+    <pre><code class="elixir" data-trim data-noescape>
+      iex> spawn_link fn -> raise "oops" end
+      #PID<0.41.0>
+
+      ** (EXIT from #PID<0.41.0>) an exception was raised:
+          ** (RuntimeError) oops
+              :erlang.apply/2
+    </code></pre>
   </section>
 </section>
 <section>
   <section>
-    So how do we keep state?
+    <h2>So how do we keep state?</h2>
+  </section>
+  <section>
+    Can't do this :(
+    <pre><code class="c" data-trim data-noescape>
+      for(i = 0; i < sizeof(array); i++) {
+        array[i] = array[i] * 2;
+      }
+    </code></pre>
+  </section>
+  <section>
+    But we can do this
+    <pre><code class="elixir" data-trim data-noescape>
+      Enum.map(array, fn(x) -> x * 2 end)
+    </code></pre>
+  </section>
+  <section>
+    <pre><code class="elixir" data-trim data-noescape>
+    # Naive implimentation
+    defmodule Custom do
+      def map(list, f) do
+        map_list([], list, f)
+      end
+      def map_list(result, [], _f) do
+        Enum.reverse(result)
+      end
+      def map_list(result, [head | tail], f) do
+        map_list([f.(head) | result], tail, f)
+      end
+    end
+    </code></pre>
+  </section>
+  <section>
+    Can't do this :(
+    <pre><code class="c" data-trim data-noescape>
+      human = Human.new(name: "Pete")
+      human.talk!
+    </code></pre>
   </section>
 </section>
 <section>
