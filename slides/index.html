@@ -757,10 +757,168 @@ iex(4)>
       human.talk!
     </code></pre>
   </section>
+  <section>
+    But we can do this :)
+    <pre><code class="elixir" data-trim data-noescape>
+      pete = %Human(name: "Pete")
+      Human.talk(pete)
+    </code></pre>
+
+    <pre><code class="elixir" data-trim data-noescape>
+    defmodule Human do
+      defstruct name: "", surname: "", age: 0
+
+      def talk(%Human{name: name}) do
+        IO.puts "My name is #{name}"
+      end
+    end
+    </code></pre>
+  </section>
+  <section>
+    That is not keeping state!
+  </section>
 </section>
 <section>
   <section>
-    So how do we keep state?
+    <h2>So how do we keep state?</h2>
+    ¯\_(ツ)_/¯
+  </section>
+  <section>
+    Message passing
+
+    <pre><code class="elixir" data-trim data-noescape>
+    iex(9)> pid = spawn_link(fn -> {:ok} end)
+    #PID<0.101.0>
+    </code></pre>
+
+    <pre><code class="elixir" data-trim data-noescape>
+    pid = spawn_link(fn ->
+      receive do
+        {:msg, contents} -> IO.puts contents
+      end
+    end)
+    send pid, {:msg, "hello world"}
+    </code></pre>
+  </section>
+  <section>
+    Really keeping state
+    <pre><code class="elixir" data-trim data-noescape>
+    defmodule Store do
+      def start_link do
+        pid = spawn_link(fn -> loop(%{}) end)
+        {:ok, pid}
+      end
+
+      def loop(map) do
+        receive do
+          {:get, key} ->
+            ...
+          {:put, key, value} ->
+            ...
+        end
+        loop(map)
+      end
+    end
+    </code></pre>
+  </section>
+  <section>
+    The Agent!
+    <pre><code class="elixir" data-trim data-noescape>
+    defmodule Store do
+      def start_link do
+        Agent.start_link(fn -> %{} end)
+      end
+
+      def get(pid, key) do
+        Agent.get(pid, &Map.get(&1, key))
+      end
+
+      def put(pid, key, value) do
+        Agent.update(pid, &Map.put(&1, key, value))
+      end
+    end
+    </code></pre>
+    <pre><code class="elixir" data-trim data-noescape>
+      {:ok, pid} = Store.start_link
+      Store.put(pid, "name", "Wilhelm")
+      assert Store.get(pid, "name") == "Wilhelm"
+    </code></pre>
+  </section>
+</section>
+<section>
+  <section>
+    <h2>GenServer</h2>
+  </section>
+  <section>
+    <pre><code class="elixir" data-trim data-noescape>
+      test "add something" do
+        {:ok, pid} = Human.start_link
+        assert Human.hungry?(pid) == true
+        Human.feed(pid)
+        assert Human.hungry?(pid) == false
+      end
+    </code></pre>
+  </section>
+  <section>
+    <pre><code class="elixir" data-trim data-noescape>
+      defmodule Human do
+        use GenServer
+        def start_link do
+          GenServer.start_link(__MODULE__, %{hunger: 10})
+        end
+        def hungry?(pid), do: GenServer.call(pid, :hungry?)
+        def feed(pid), do: GenServer.call(pid, :feed)
+
+        def handle_call(:hungry?, _from, state) do
+          {:reply, state[:hunger] > 5, state}
+        end
+        def handle_call(:feed, _from, %{hunger: hunger} = state) do
+          {:reply, hunger, %{state | hunger: hunger - 5}}
+        end
+      end
+    </code></pre>
+  </section>
+  <section>
+    <pre><code class="elixir" data-trim data-noescape>
+    defmodule Schedular do
+      use GenServer
+      def start_link do
+        GenServer.start_link(__MODULE__, %{})
+      end
+      def init(state) do
+        Process.send_after(self(), :work, 1000)
+        {:ok, state}
+      end
+      def handle_info(:work, state) do
+        Logger.debug "Doing work every second!"
+        Process.send_after(self(), :work, 1000)
+        {:noreply, state}
+      end
+    end
+    </code></pre>
+  </section>
+</section>
+<section>
+  <h2>Almost there</h2>
+  <img src="images/cat.jpeg" />
+</section>
+<section>
+  <section>
+    <h2>Distributed processes</h2>
+  </section>
+  <section>
+    <pre><code class="elixir" data-trim data-noescape>
+    iex --sname foo
+    iex(foo@Wilhelms-MacBook-Pro)1>
+    </code></pre>
+
+    <pre><code class="elixir" data-trim data-noescape>
+    iex --sname bar
+    iex(bar@Wilhelms-MacBook-Pro)1>Node.spawn_link
+    ...> :"foo@Wilhelms-MacBook-Pro", fn -> IO.puts "Hello" end
+    #PID<9287.94.0>
+    Hello
+    </code></pre>
   </section>
 </section>
 
