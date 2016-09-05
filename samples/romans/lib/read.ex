@@ -4,11 +4,11 @@ defmodule Read do
     |> parse
   end
 
-  defp parse(:ok, output) do
-    ouput
+  defp parse({:ok, output}) do
+    output
   end
 
-  defp parse(:error, _) do
+  defp parse({:error, _}) do
     File.write "hello", "world"
     "world"
   end

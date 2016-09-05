@@ -1,7 +1,3 @@
-defmodule Human do
-  defstruct name: "", surname: "", age: 0
-end
-
 defmodule Bar do
   def serve_drinks(%Human{age: age}) when age > 18 do
     {:ok, "Enjoy!"}

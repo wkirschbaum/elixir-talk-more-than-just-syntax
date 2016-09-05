@@ -616,16 +616,73 @@ iex(4)>
         |> parse
       end
 
-      defp parse(:ok, output) do
-        ouput
+      defp parse({:ok, output}) do
+        output
       end
 
-      defp parse(:error, _) do
+      defp parse({:error, _}) do
         File.write "hello", "world"
         "world"
       end
     end
     </code></pre>
+  </section>
+</section>
+<section>
+  <section>
+    <h2>Concurrency</h2>
+  </section>
+  <section>
+    <pre><code class="elixir" data-trim data-noescape>
+    defmodule Spawner do
+      def spawn_mulitple(0), do: IO.puts "done"
+      def spawn_mulitple(num) do
+        spawn(&long_process/0)
+        spawn_mulitple(num - 1)
+      end
+
+      defp long_process do
+        Process.sleep(1000)
+        IO.puts "tick"
+      end
+    end
+    </code></pre>
+  </section>
+  <section>
+    <pre><code class="elixir" data-trim data-noescape>
+    defmodule Spawner do
+      def spawn_mulitple(0), do: IO.puts "done"
+      def spawn_mulitple(num) do
+        spawn(&long_process/0)
+        spawn_mulitple(num - 1)
+      end
+
+      defp long_process do
+        Process.sleep(1000)
+        IO.puts "tick"
+      end
+    end
+    </code></pre>
+    <pre><code class="elixir" data-trim data-noescape>
+    iex(12)> Spawner.spawn_mulitple(1000)
+    done
+    :ok
+    tick
+    tick
+    </code></pre>
+  </section>
+  <section>
+    spawn_link
+  </section>
+</section>
+<section>
+  <section>
+    So how do we keep state?
+  </section>
+</section>
+<section>
+  <section>
+    So how do we keep state?
   </section>
 </section>
 
