@@ -851,7 +851,7 @@ iex(4)>
   </section>
   <section>
     <pre><code class="elixir" data-trim data-noescape>
-      test "add something" do
+      test "feeds a human" do
         {:ok, pid} = Human.start_link
         assert Human.hungry?(pid) == true
         Human.feed(pid)
@@ -879,6 +879,7 @@ iex(4)>
     </code></pre>
   </section>
   <section>
+    Whenever?
     <pre><code class="elixir" data-trim data-noescape>
     defmodule Schedular do
       use GenServer
@@ -899,8 +900,51 @@ iex(4)>
   </section>
 </section>
 <section>
+  <section>
+    <h2>Supervisors</h2>
+  </section>
+  <section>
+    <pre><code class="elixir" data-trim data-noescape>
+    defmodule Schedular.Supervisor do
+    use Supervisor
+    def start_link do
+      Supervisor.start_link(__MODULE__, [])
+    end
+    def init([]) do
+      children = [
+        worker(Schedular, [])
+      ]
+      supervise(children, strategy: :one_for_one)
+    end
+  end
+  </code></pre>
+  </section>
+  <section>
+    <div>
+      Strategies
+    </div>
+    <ul>
+      <li>
+        :one_for_one
+      </li>
+      <li>
+        :one_for_all
+      </li>
+      <li>
+        :rest_for_one
+      </li>
+      <li>
+        :simple_one_for_one
+      </li>
+    </ul>
+  </section>
+  <section>
+    <img data-src="images/supervisor_tree.jpeg" />
+  </section>
+</section>
+<section>
   <h2>Almost there</h2>
-  <img src="images/cat.jpeg" />
+  <img data-src="images/cat.jpeg" />
 </section>
 <section>
   <section>
@@ -920,6 +964,25 @@ iex(4)>
     Hello
     </code></pre>
   </section>
+</section>
+<section>
+  <section>
+    <h2>Phoenix</h2>
+  </section>
+</section>
+<section>
+  Python Runner Example
+  <br />
+  <a href="https://github.com/wkirschbaum/ElixirPythonRunner" target="_blank">wkirschbaum/ElixirPythonRunner</a>
+  <br />
+  <br />
+  These slides and code
+  <br />
+  <a href="https://github.com/wkirschbaum/elixir-talk-more-than-just-syntax" target="_blank">wkirschbaum/elixir-talk-more-than-just-syntax</a>
+</section>
+<section>
+  <h1>The End</h1>
+  Thanks for listening!
 </section>
 
 
