@@ -5,7 +5,7 @@ defmodule Romans do
   ## Examples
 
       iex> Romans.convert("XII")
-      12
+      13
 
   """
   def convert(romans) do

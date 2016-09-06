@@ -75,36 +75,6 @@ end
   <section>
     Built on the Erlang virtual machine (BEAM)
   </section>
-  <section>
-    Hex
-    <pre><code class="elixir" data-trim data-noescape>
-    defp deps do
-      [{:basic_auth, "~> 1.0.0"}]
-    end
-    </code></pre>
-  </section>
-  <section>
-    <div>
-      Mix
-    </div>
-    <ul>
-      <li>
-        Project creation
-      </li>
-      <li>
-        Project compilation
-      </li>
-      <li>
-        Running tests
-      </li>
-      <li>
-        Environments
-      </li>
-      <li>
-        Exploring
-      </li>
-    </ul>
-  </section>
 </section>
 <section>
   <section>
@@ -164,7 +134,7 @@ romans/
 <section>
 
   <pre><code class="elixir" data-trim data-noescape>
-  # test/romans_test.exs
+  # test/romans_test.ex
   defmodule RomansTest do
     use ExUnit.Case, async: true
     doctest Romans
@@ -486,13 +456,24 @@ Converts roman numerals to integers
 ## Examples
 
     iex> Romans.convert("XII")
-    12
+    13
 
 """
 def convert(romans) do
   romans
 
 ...
+    </code></pre>
+  </section>
+  <section>
+    <pre><code class="elixir" data-trim data-noescape>
+    1) test doc at Romans.convert/1 (1) (RomansTest)
+     test/romans_test.exs:3
+     Doctest failed
+     code: Romans.convert("XII") === 13
+     lhs:  12
+     stacktrace:
+       lib/romans.ex:7: Romans (module)
     </code></pre>
   </section>
   <section>
@@ -579,6 +560,18 @@ iex(4)>
       3
       iex(3)> {a, 9} = {3, 5}
       ** (MatchError) no match of right hand side value: [3, 5]
+    </code></pre>
+  </section>
+  <section>
+    <pre><code class="elixir" data-trim data-noescape>
+      iex(1)> {a, 5} = {3, 5}
+      {3, 5}
+      iex(2)> a
+      3
+      iex(3)> {a, 9} = {3, 5}
+      ** (MatchError) no match of right hand side value: [3, 5]
+    </code></pre>
+    <pre><code class="elixir" data-trim data-noescape>
       iex(4)> [name, "Smith"] = ["John", "Smith"]
       ["John", "Smith"]
       iex(5)> name
@@ -659,10 +652,10 @@ iex(4)>
   <section>
     <pre><code class="elixir" data-trim data-noescape>
     defmodule Spawner do
-      def spawn_mulitple(0), do: IO.puts "done"
-      def spawn_mulitple(num) do
-        spawn(&long_process/0)
-        spawn_mulitple(num - 1)
+      def spawn_multiple(0), do: IO.puts "done"
+      def spawn_multiple(num) do
+        <b>spawn</b>(&long_process/0)
+        spawn_multiple(num - 1)
       end
 
       defp long_process do
@@ -675,10 +668,10 @@ iex(4)>
   <section>
     <pre><code class="elixir" data-trim data-noescape>
     defmodule Spawner do
-      def spawn_mulitple(0), do: IO.puts "done"
-      def spawn_mulitple(num) do
-        spawn(&long_process/0)
-        spawn_mulitple(num - 1)
+      def spawn_multiple(0), do: IO.puts "done"
+      def spawn_multiple(num) do
+        <b>spawn</b>(&long_process/0)
+        spawn_multiple(num - 1)
       end
 
       defp long_process do
@@ -688,7 +681,7 @@ iex(4)>
     end
     </code></pre>
     <pre><code class="elixir" data-trim data-noescape>
-    iex(12)> Spawner.spawn_mulitple(1000)
+    iex(12)> Spawner.spawn_multiple(1000)
     done
     :ok
     tick
@@ -752,9 +745,19 @@ iex(4)>
   </section>
   <section>
     Can't do this :(
-    <pre><code class="c" data-trim data-noescape>
-      human = Human.new(name: "Pete")
+    <pre><code class="ruby" data-trim data-noescape>
+      human = Human.new("Pete")
       human.talk!
+    </code></pre>
+    <pre><code class="ruby" data-trim data-noescape>
+      class Human
+        def initialize(name)
+          @name = name
+        end
+        def talk!
+          puts "My name is #{name}"
+        end
+      end
     </code></pre>
   </section>
   <section>
@@ -863,7 +866,7 @@ iex(4)>
     <pre><code class="elixir" data-trim data-noescape>
       defmodule Human do
         use GenServer
-        def start_link do
+        def start_link do # new
           GenServer.start_link(__MODULE__, %{hunger: 10})
         end
         def hungry?(pid), do: GenServer.call(pid, :hungry?)
@@ -964,6 +967,36 @@ iex(4)>
     Hello
     </code></pre>
   </section>
+</section>
+<section>
+  Hex
+  <pre><code class="elixir" data-trim data-noescape>
+  defp deps do
+    [{:basic_auth, "~> 1.0.0"}]
+  end
+  </code></pre>
+</section>
+<section>
+  <div>
+    Mix
+  </div>
+  <ul>
+    <li>
+      Project creation
+    </li>
+    <li>
+      Project compilation
+    </li>
+    <li>
+      Running tests
+    </li>
+    <li>
+      Environments
+    </li>
+    <li>
+      Exploring
+    </li>
+  </ul>
 </section>
 <section>
   <section>
